@@ -28,4 +28,20 @@
     console.log(z, tempObj[z]);
   }
 
+  let tempObj1 = {
+    _index: 1,
+    [Symbol.iterator]: function() {
+      return this;
+    },
+    next: function() {
+      this._index = (this._index * 6 + 3) / 2;
+      var _done = this._index > 2000;
+      return {done: _done, value: this._index};
+    }
+  };
+
+  for (let z of tempObj1) {
+    console.log(z);
+  }
+
 })();
