@@ -6,8 +6,7 @@
     tempArray[i] = parseInt(i * 6 -1 / 3);
   }
 
-  // console.log(tempArray.toString());
-
+  // iterate array
   for (var j of tempArray) {
     if (j % 5 > 0) continue;
     console.log(j);
@@ -20,6 +19,7 @@
 
   let tempObj = new tempFactory('xjj');
 
+  // iterate object key
   for (let z of Object.keys(tempObj)) {
     console.log(z, tempObj[z]);
   }
@@ -28,7 +28,7 @@
     console.log(z, tempObj[z]);
   }
 
-  let tempObj1 = {
+  let iterableObject = {
     _index: 1,
     [Symbol.iterator]: function() {
       return this;
