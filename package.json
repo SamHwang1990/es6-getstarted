@@ -1,0 +1,14 @@
+{
+  "name": "es6-started",
+  "version": "0.0.0",
+  "description": "es6 get started",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "es6"
+  ],
+  "author": "SamHwang1990",
+  "license": "ISC"
+}
