@@ -23,18 +23,20 @@
       yield 1;
       yield 3;
       yield 6;
-    } catch(err) {
-      console.log(err);
     } finally {
       cleanup()
     }
   }
 
   for (var i of produceValues()) {
-    if (i > 2) {
-      break;
+    try {
+      if (i > 2) {
+        throw('??');
+      }
+      doJob(i);
+    } catch(err) {
+      console.log(err);
     }
-    doJob(i);
   }
 
 })();
