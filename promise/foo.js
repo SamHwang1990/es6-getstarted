@@ -20,12 +20,26 @@ var getJSON = function(name) {
   }).then(JSON.parse);
 };
 
-var output = function(name, content, callback) {
-  fs.writeFile(path.resolve('./', 'output.txt'), content + '\r\n', callback);
+var output = function(content, action) {
+  var actionFuc = action == 'append' ? fs.appendFile : fs.writeFile;
+  return new Promise(function(resolve, reject) {
+    actionFuc(path.resolve('./', 'output.txt'), content + '\r\n', function(err, data) {
+      if (err) {
+        return reject(err);
+      }
+      resolve(data);
+    });
+  });
 };
 
 getJSON('story.json').then(function(story) {
-  fs.writeFile(path.resolve('./', 'output.txt'), data.heading, function(err) {
-    if (err) throw err;
+  output('', 'empty').then(function() {
+    for (let url of story.chapterUrls) {
+      getJSON(url).then(function(data) {
+        output('chapter: ' + data.chapter + '\r\n' + 'content: ' + data.content + '\r\n', 'append');
+      })
+    }
   });
+}).catch(function(err) {
+  console.log(err);
 });
