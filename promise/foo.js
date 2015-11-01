@@ -81,7 +81,7 @@ false && (getJSON('story.json').then(function(story) {
 }));
 
 // order promise parallel which output content after each file loaded.
-true && (getJSON('story.json').then(function(story) {
+false && (getJSON('story.json').then(function(story) {
   output('').then(function() {
     story.chapterUrls.map(getJSON).reduce(function(sequence, chapterPromise) {
       return sequence.then(function() {
@@ -96,3 +96,46 @@ true && (getJSON('story.json').then(function(story) {
     console.log('empty output file failed');
   })
 }));
+
+// co with generator
+var spawn = function(promiseGeneratorFunc) {
+  var continuer = function(verb, arg) {
+    var result;
+    try {
+      result = generator[verb](arg);
+    } catch (err) {
+      return Promise.reject(err);
+    }
+    if (result.done) {
+      return result.value;
+    } else {
+      return Promise.resolve(result.value).then(onFullFilled, onRejected);
+    }
+  };
+
+  var generator = promiseGeneratorFunc(),
+      onFullFilled = continuer.bind(continuer, 'next'),
+      onRejected = continuer.bind(continuer, 'throw');
+
+  return onFullFilled();
+};
+
+var _spawn = spawn(function* () {
+  try {
+    yield output('');
+
+    let story = yield getJSON('story.json');
+
+    let chapterPromises = story.chapterUrls.map(getJSON);
+
+    for (let chapterPromise of chapterPromises) {
+      let data = yield chapterPromise;
+      yield output('chapter: ' + data.chapter + '\r\n' + 'content: ' + data.content + '\r\n', 'append');
+    }
+  } catch(err) {
+    console.log(err);
+  }
+
+});
+
+console.log(_spawn);

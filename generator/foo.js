@@ -3,8 +3,9 @@
 
   function* quips(name) {
     console.log(1);
-    yield 'Hey ' + name;
+    var newName = yield 'Hey ' + name;
     console.log(2);
+    console.log(newName);
     yield 'Keep going';
     console.log(3);
     if (name.startsWith('x')) {
@@ -19,7 +20,7 @@
   console.log(iter.toString());
 
   console.log(iter.next());
-  console.log(iter.next());
+  console.log(iter.next('Sam'));
   console.log(iter.next());
   console.log(iter.next());
   console.log(iter.next());
@@ -32,6 +33,8 @@
 
 +(function() {
   'use strict';
+
+  return false;
 
   function* range(start, stop) {
     for (let i = start; i <= stop; i++) {
