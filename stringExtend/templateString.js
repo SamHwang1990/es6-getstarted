@@ -19,6 +19,7 @@
       { first: 'Lars', last: '<Croft>' }
     ];
 
+    // 模板字符串可用于普通字符串, 多行字符串
     console.log(`Hi Everyone!`);
     console.log(`
       <ul>
@@ -27,6 +28,8 @@
       </ul>
     `);
 
+    // 还可以放置表达式, 函数调用
+    // 因为支持表达式, 所以还支持嵌套模板字符串
     console.log(`My name is ${'Sam'}, i'm ${2016 - 1990} years old!`);
     console.log(`My name is ${obj.name}, i born in ${obj.year}!`);
     console.log(`foo ${fn()} bar`);
