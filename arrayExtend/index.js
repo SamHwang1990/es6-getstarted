@@ -38,7 +38,7 @@
   {
     // Array.prototype.copyWithin(targetIndex, startIndex, endIndex) 用于在数组内部复制数据到指定位置
     // startIndex 为数据源的起始索引
-    // endIndex 为数据源的结束索引
+    // endIndex 为数据源的结束索引, 可选, 默认是数组长度
     // 则, 要被复制的数据区间是[startIndex, endIndex), 一闭一开, 即, 包括startIndex 对应的元素, 不包括endIndex 对应的元素
     // targetIndex 为要黏贴的目标索引
     // 该方法会修改数组本身
