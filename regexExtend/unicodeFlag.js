@@ -34,6 +34,9 @@
     console.log(/^\S$/.test(str));
     console.log(/^\S$/u.test(str));
 
+    // 正则实例提供unicode 属性来判断是否使用u flag
+    console.log(/\u{1f4a9}/u.unicode);
+
   }
 
 })();
