@@ -7,7 +7,7 @@
   // JS 发展到ES6 这个阶段,提供了以下集中遍历对象属性的api
   // 留意在遍历属性是对原型链属性,不可枚举属性以及Symbol 类型属性的区别
   // 1. for ... in 遍历: 循环遍历对象自身的和继承的可枚举属性（不含Symbol属性）
-  // 2. Object.keys返回一个数组，包括对象自身的（不含继承的）所有可枚举属性（不含Symbol属性）
+  // 2. Object.keys()返回一个数组，包括对象自身的（不含继承的）所有可枚举属性（不含Symbol属性）
   // 3. JSON.stringify() 只串行化对象自身的可枚举的属性（不含Symbol属性）
   // 4. Object.getOwnPropertyNames() 返回一个数组，包含对象自身的所有属性,包括不可枚举属性（不含Symbol属性）
   // 5. Object.getOwnPropertySymbols() 返回一个数组，包含对象自身的所有Symbol属性
