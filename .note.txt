@@ -1,0 +1,5 @@
+貌似类似这样可以Babel 编译成功
+
+./node_modules/.bin/babel src -d dist --presets es2015
+
+好像有个全局的babel 导致容易出错, 推荐使用项目自身安装的babel-cli
