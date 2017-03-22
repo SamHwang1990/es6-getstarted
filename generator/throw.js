@@ -62,7 +62,7 @@
     // 下面生成器对象抛出的异常不能被生成器自身捕捉到,所以,导致生成器的停止遍历
     let gen = count();
     try {
-      // 基本上, 最开始就throw 是不可能被生成器不抓到的
+      // 基本上, 最开始就throw 是不可能被生成器抓到的
       console.log(gen.throw('something error'));
     } catch(e) {
       console.log(`outer catch: ${e}`);

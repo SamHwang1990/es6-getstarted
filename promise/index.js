@@ -12,7 +12,7 @@
   // 3. 初始化为rejected,则不会再改变
 
   // 从上面状态周期的分析可以看出,只要一个promise 状态变为resolved 或者rejected,则该promise 的状态是不会在改变了,
-  // 此时可以认为promsie 已经完成了,不管是成功还是失败。
+  // 此时可以认为promise 已经完成了,不管是成功还是失败。
 
   // 基于这种行为,promise 实例能记住该promise 变状态后的值,并不做更改。
   // 这样,往后再添加回调,也只会拿到同一个值。
@@ -29,7 +29,7 @@
 
   // 注意几点:
   // 1. 构造Promise 时传入的函数参数是马上执行的,不会跨事件循环
-  // 2. 构造Promise 时传入的函数参数中,resolve()、reject() 的执行最早都要到当前事件循环的最后
+  // 2. 构造Promise 时传入的函数参数中,resolve()、reject() 的回调执行最早都要到当前事件循环的最后
   // 3. 上面说过,每个promise 状态如果变为resolved 或rejected 后就不会再改变了,这里引入一种例外:
   //    当使用resolve() 来将状态置为resolved, 如果传入另一个promise 实例,
   //    则可以这么理解,当前promise 的状态会委托给新的promise 实例
@@ -42,7 +42,7 @@
   // 这两个方法因为设定会返回一个新promise 方便链式操作,所以可以认为返回操作本身就是调用Promise.resolve() 静态方法
   // 那么如果then、catch 内部return 一个promise, 就相当于Promise.resolve(promise)
 
-  lse && (function() {
+  false && (function() {
     let promise = new Promise((resolve, reject) => {
       setTimeout(() => {
         resolve('foo');
@@ -55,7 +55,7 @@
 
   // 需要留意几个关键的函数调用时机:
   // 1. Promise 实例内部业务函数是初始化Promise 实例时立刻执行的,在当此事件循环中
-  // 2. Promise 实例内部业务函数的resolve 的执行时机最早是当此事件循环结束之前,如果有setTimeout 或ajax 回调,则会再另外的事件循环中
+  // 2. Promise 实例内部业务函数的resolve 的回调执行时机最早是当此事件循环结束之前,如果有setTimeout 或ajax 回调,则会再另外的事件循环中
   false && (() => {
     let promise = new Promise((resolve, reject) => {
       console.log('promise');
