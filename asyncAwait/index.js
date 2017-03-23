@@ -216,12 +216,33 @@ function awaitQueen() {
     return 10 + r1 + r2;
   }
 
-  async function serielAwait() {
+  async function serialAwait() {
     let r1 = await resolveAfter2Seconds(20);
     let r2 = await resolveAfter2Seconds(30);
 
     return 10 + r1 + r2;
   }
+
+  let parallelStart = process.hrtime();
+  parallelAwait().then(v => {
+    let interval = process.hrtime(parallelStart);
+    console.log(`parallel await span ${interval[0]} seconds and ${interval[1]} nanoseconds.`);
+    assert.equal(v, 60);
+  });
+
+  let parallelWithPromiseAllStart = process.hrtime();
+  parallelAwaitWithPromiseAll().then(v => {
+    let interval = process.hrtime(parallelWithPromiseAllStart);
+    console.log(`parallel await span ${interval[0]} seconds and ${interval[1]} nanoseconds.`);
+    assert.equal(v, 60);
+  });
+
+  let serialStart = process.hrtime();
+  serialAwait().then(v => {
+    let interval = process.hrtime(serialStart);
+    console.log(`serial await span ${interval[0]} seconds and ${interval[1]} nanoseconds.`);
+    assert.equal(v, 60);
+  })
 }
 
 awaitQueen();
