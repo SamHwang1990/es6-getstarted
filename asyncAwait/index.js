@@ -251,7 +251,6 @@ function asyncAsObjectProperty() {
 *    3.2. 调用模式：let myName = foo.myName; myName()
 *       此时则相当于上面的第2 点
 * */
-asyncFunctionContext();
 function asyncFunctionContext() {
   async function AsyncConstructor() {
     this._name_ = 'foo';
@@ -364,3 +363,21 @@ function awaitQueen() {
     assert.equal(v, 60);
   })
 }
+
+function asyncExecTiming() {
+  async function a1() {
+    console.log(`async function executing`)
+    await new Promise(resolve => {
+      setTimeout(resolve, 200);
+    });
+    console.log(`async do nothing anymore`);
+  }
+
+  console.log('before invoke async function');
+  a1().then(() => {
+    console.log('async function resolve');
+  })
+  console.log('after invoke async function');
+}
+
+asyncExecTiming();
